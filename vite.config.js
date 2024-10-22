@@ -70,10 +70,7 @@ export default defineConfig({
   build: {
     rollupOptions: {
       input: {
-        main: './index.html',
-        cf: './cf.html',
-        oauth: './oauth.html',
-        screencapture: './screencapture.html',
+        main: './index.html'
       },
     },
   },
