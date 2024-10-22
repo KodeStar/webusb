@@ -1,7 +1,7 @@
 {
   "id": "/",
-  "short_name": "IWA KS",
-  "name": "Kitchen Sink IWA",
+  "short_name": "Webusb",
+  "name": "Kasm Webusb Test",
   "version": "0.0.0",
   "update_manifest_url": "https://github.com/chromeos/iwa-sink/releases/latest/download/update.json",
   "icons": [
@@ -14,14 +14,9 @@
   ],
   "start_url": "/",
   "display": "standalone",
-  "display_override": ["borderless"],
   "scope": "/",
   "isolated_storage": true,
   "permissions_policy": {
-    "cross-origin-isolated": ["self"],
-    "direct-sockets": ["self"],
-    "controlledframe": ["self"],
-    "window-management": ["self"],
-    "all-screens-capture": ["self"]
+    "usb": ["self"]
   }
 }
