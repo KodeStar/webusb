@@ -27,6 +27,7 @@ dotenv.config();
 const plugins = [injectHTML()];
 
 if (process.env.NODE_ENV === 'production') {
+  
   // Get the key and decrypt it to sign the web bundle
   const key = wbnSign.parsePemKey(
     process.env.KEY || fs.readFileSync('./certs/encrypted_key.pem'),
@@ -36,11 +37,13 @@ if (process.env.NODE_ENV === 'production') {
       )),
   );
 
+  const url = new wbnSign.WebBundleId(key).serializeWithIsolatedWebAppOrigin()
+  console.log('url: ' + url)
   // Add the wbn bundle only during a production build
   plugins.push({
     ...wbn({
       // Ensures the web bundle is signed as an isolated web app
-      baseURL: new wbnSign.WebBundleId(key).serializeWithIsolatedWebAppOrigin(),
+      baseURL: url,
       // Ensure that all content in the `public` directory is included in the web bundle
       static: {
         dir: 'public',
