@@ -17,6 +17,7 @@
   "scope": "/",
   "isolated_storage": true,
   "permissions_policy": {
+    "cross-origin-isolated": ["self"],
     "usb": ["*"],
     "usb-unrestricted": ["*"]
   }
