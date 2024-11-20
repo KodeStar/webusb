@@ -17,7 +17,7 @@
   "scope": "/",
   "isolated_storage": true,
   "permissions_policy": {
-    "usb": ["self"],
-    "usb-unrestricted": ["self"]
+    "usb": ["*"],
+    "usb-unrestricted": ["*"]
   }
 }
