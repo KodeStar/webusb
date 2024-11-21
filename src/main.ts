@@ -45,12 +45,13 @@ async function testPrint(device) {
   await device.open();
   await device.selectConfiguration(1);
   await device.claimInterface(0);
-  await device.transferOut(
+  let test = await device.transferOut(
     device.configuration.interfaces[0].alternate.endpoints.find(obj => obj.direction === 'out').endpointNumber,
     new Uint8Array(
       new TextEncoder().encode(cmds.join('\r\n'))
     ),
   );
+  console.log(test)
   await device.close();
 }
 
