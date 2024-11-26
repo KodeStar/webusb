@@ -18,7 +18,34 @@ if (!('usb' in navigator)) {
   console.log('WebUSB API is not supported')
 }
 
-let button = document.getElementById('request-device')
+window.addEventListener('message', event => {
+  // IMPORTANT: check the origin of the data!
+  console.log(event.origin)
+  if (event.origin === 'https://kasm-5012.testy.dev') {
+      // The data was sent from your site.
+      // Data sent with postMessage is stored in event.data:
+      console.log(event.data);
+      test()
+  } else {
+      // The data was NOT sent from your site!
+      // Be careful! Do not use it. This else branch is
+      // here just for clarity, you usually shouldn't need it.
+      return;
+  }
+});
+
+const kasmframe = document.getElementById('kasmframe');
+const test = async () => {
+  console.log('test tesy testing')
+  const device = await navigator.usb.requestDevice({ filters: [] });
+  console.log(device)
+  kasmframe.contentWindow.postMessage({ device: true }, '*');
+
+
+  testPrint(device)
+}
+
+/*let button = document.getElementById('request-device')
 button?.addEventListener('click', async () => {
   try {
     const device = await navigator.usb.requestDevice({ filters: [] });
@@ -29,7 +56,7 @@ button?.addEventListener('click', async () => {
   } catch (e) {
     console.error(e);
   }
-})
+})*/
 
 async function testPrint(device) {
   const cmds = [
