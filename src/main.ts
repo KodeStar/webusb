@@ -20,12 +20,15 @@ if (!('usb' in navigator)) {
 
 window.addEventListener('message', event => {
   // IMPORTANT: check the origin of the data!
-  console.log(event.origin)
+  // console.log(event.origin)
   if (event.origin === 'https://kasm-5012.testy.dev') {
       // The data was sent from your site.
       // Data sent with postMessage is stored in event.data:
-      console.log(event.data);
-      test()
+      switch (event.data) {
+        case 'connect':
+          connect()
+        break;
+      }      
   } else {
       // The data was NOT sent from your site!
       // Be careful! Do not use it. This else branch is
@@ -35,14 +38,11 @@ window.addEventListener('message', event => {
 });
 
 const kasmframe = document.getElementById('kasmframe');
-const test = async () => {
-  console.log('test tesy testing')
+const connect = async () => {
+  console.log('wrapper connect')
   const device = await navigator.usb.requestDevice({ filters: [] });
   console.log(device)
-  kasmframe.contentWindow.postMessage({ device: true }, '*');
-
-
-  testPrint(device)
+  kasmframe.contentWindow.postMessage('connected', '*');
 }
 
 /*let button = document.getElementById('request-device')
@@ -56,7 +56,7 @@ button?.addEventListener('click', async () => {
   } catch (e) {
     console.error(e);
   }
-})*/
+})
 
 async function testPrint(device) {
   const cmds = [
@@ -86,3 +86,4 @@ document.addEventListener('DOMContentLoaded', async () => {
   let devices = await navigator.usb.getDevices()
   console.log(devices)
 })
+*/
